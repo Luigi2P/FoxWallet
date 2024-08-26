@@ -1,5 +1,8 @@
 let web3 = new Web3(window.ethereum);
 
+GetBalance()
+GetSender()
+
 async function TranferTo() {
     const recipient = document.getElementById('recipient').value;
     const amount = document.getElementById('amount').value;
@@ -24,5 +27,11 @@ async function GetBalance() {
     const balance = await web3.eth.getBalance(accounts[0]);
     const ethBalance = await web3.utils.fromWei(balance, 'ether');
 
-    document.getElementById('Balance').innerHTML = 'Balance: ' + ethBalance;
+    document.getElementById('Balance').innerHTML = ethBalance + ' ETH available to swap';
+}
+
+async function GetSender() {
+    const accounts = await web3.eth.requestAccounts();
+
+    document.getElementById('Sender').innerHTML = 'Send from ' + accounts[0];
 }

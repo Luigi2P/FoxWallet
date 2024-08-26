@@ -1,12 +1,11 @@
 body {
     background-color: #141618;
     /* text-align: center; */
+    color: white;
     font-family: "Roboto", sans-serif;
 }
 
-div {
-    color: white;
-}
+
 
 .sidenav {
     height: 100%;
@@ -18,6 +17,28 @@ div {
     background-color: #24272a;
     overflow-x: hidden;
     transition: 0.5s;
-    padding-top: 60px;
-    text-align: center;
+    padding-top: 1em;
+    /* text-align: center; */
+}
+
+.sidenavElement {
+    display: block;
+    padding: 0.6em 1em;
+    text-decoration: none;
+    color: white;
+}
+
+.sidenavElement:hover:not(.active) {
+    background-color: #2d2f32;
+    color: white;
+}
+
+div.sidenavElement:hover:not(.active) {
+    background-color: #24272a;
+    color: white;
+}
+
+.sidenavElement.active {
+    background-color: #2d2f32;
+    color: white;
 }

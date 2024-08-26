@@ -4,32 +4,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transfer</title>
+    <title>FoxWallet</title>
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
     <script src="script.js"></script>
 </head>
 
 <body>
-    <div id="mySidenav" class="sidenav">
+    <div class="sidenav">
         <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-        <b>🦊 FOX WALLET</b>
-        <div><a href="#">About</a></div>
-        <div><a href="#">Services</a></div>
-        <div><a href="#">Clients</a></div>
-        <div><a href="#">Contact</a></div>
+        <div class="sidenavElement" id="FoxWallet"><b>🦊FOX WALLET</b></div>
+        <div><a class="sidenavElement" href="#"> 📊Overview</a></div>
+        <div><a class="sidenavElement active" href="#">🔁Move Crypto</a></div>
+        <div><a class="sidenavElement" href="#">🪙Tokens</a></div>
+        <div><a class="sidenavElement" href="#">🖼️NFTs</a></div>
+        <div><a class="sidenavElement" href="#">🕹️Games</a></div>
     </div>
 
     <div style="margin-left: 20%;">
         <h1>Transfer</h1>
+        <p>
+            <b id="Sender">Send from ?</b>
+            <button onclick="GetSender()">Refresh Sender</button>
+        </p>
+        <p>
+            <b id="Balance">? ETH available to swap</b>
+            <button onclick="GetBalance()">Refresh Balance</button>
+        </p>
         <div>
             <input type="text" id="recipient" placeholder="recipient" />
             <input type="text" id="amount" placeholder="amount" />
             <button onclick="TranferTo()">Tranfer</button>
-        </div>
-        <div>
-            <button onclick="GetBalance()">View Balance</button>
-            <p id="Balance">Balance: </p>
         </div>
     </div>
 </body>
