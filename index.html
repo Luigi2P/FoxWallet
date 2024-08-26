@@ -13,7 +13,7 @@
 <body>
     <div class="sidenav">
         <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-        <div class="sidenavElement" id="FoxWallet"><b>🦊FOX WALLET</b></div>
+        <h3 class="sidenavElement" id="FoxWallet"><b>🦊FOX WALLET</b></h3>
         <div><a class="sidenavElement" href="#"> 📊Overview</a></div>
         <div><a class="sidenavElement active" href="#">🔁Move Crypto</a></div>
         <div><a class="sidenavElement" href="#">🪙Tokens</a></div>
@@ -21,10 +21,18 @@
         <div><a class="sidenavElement" href="#">🕹️Games</a></div>
     </div>
 
-    <div style="margin-left: 20%;">
+    <div style="margin-left: 20%; margin-top: 3%;">
         <h1>Transfer</h1>
+    </div>
+
+    <form id="inforform" onsubmit="return false;" style="margin-left: 20%; margin-right: 5%;">
+
         <p>
-            <b id="Sender">Send from ?</b>
+            <b>Send from</b>
+            <select id="senders" name="senders" onchange="GetBalance()">
+                <option>No Acount Detected Yet</option>
+            </select>
+
             <button onclick="GetSender()">Refresh Sender</button>
         </p>
         <p>
@@ -36,7 +44,7 @@
             <input type="text" id="amount" placeholder="amount" />
             <button onclick="TranferTo()">Tranfer</button>
         </div>
-    </div>
+    </form>
 </body>
 
 </html>

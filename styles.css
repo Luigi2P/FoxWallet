@@ -33,7 +33,7 @@ body {
     color: white;
 }
 
-div.sidenavElement:hover:not(.active) {
+h3.sidenavElement:hover:not(.active) {
     background-color: #24272a;
     color: white;
 }
@@ -41,4 +41,37 @@ div.sidenavElement:hover:not(.active) {
 .sidenavElement.active {
     background-color: #2d2f32;
     color: white;
+}
+
+form {
+    background-color: #24272a;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+input[type="text"], select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #2d2f32;
+    color: white;
+}
+
+button {
+    width: 100%;
+    background-color: #43aefc;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #26a2fc;
 }
