@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Storage Contract</title>
+    <style>
+        body {
+            background-color: #141618;
+            /* text-align: center; */
+            font-family: "Roboto", sans-serif;
+        }
+
+        div {
+            color: white;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 15%;
+            position: fixed;
+            z-index: 1;
+            top: 0;
+            left: 0;
+            background-color: #24272a;
+            overflow-x: hidden;
+            transition: 0.5s;
+            padding-top: 60px;
+            text-align: center;
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <div id="mySidenav" class="sidenav">
+        <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
+        <b>🦊 FOX WALLET</b>
+        <div><a href="#">About</a></div>
+        <div><a href="#">Services</a></div>
+        <div><a href="#">Clients</a></div>
+        <div><a href="#">Contact</a></div>
+    </div>
+
+    <div style="margin-left: 20%;">
+        <h1>Simple Storage Contract</h1>
+        <div>
+            <input type="text" id="numberInput" placeholder="Enter a number" />
+            <button onclick="storeNumber()">Store Number</button>
+        </div>
+        <div>
+            <button onclick="viewNumber()">View Stored Number</button>
+            <p id="storedNumber">Stored Number: </p>
+        </div>
+    </div>
+
+    <script>
+        const contractAddress = '0xAf28F1Fc931d21BBD666F25a2b5e6e5C2A55bF37';
+        const abi = [
+            {
+                "inputs": [{ "internalType": "uint256", "name": "num", "type": "uint256" }],
+                "name": "store",
+                "outputs": [],
+                "stateMutability": "nonpayable",
+                "type": "function"
+            },
+            {
+                "inputs": [],
+                "name": "viewnum",
+                "outputs": [{ "internalType": "uint256", "name": "", "type": "uint256" }],
+                "stateMutability": "view",
+                "type": "function"
+            }
+        ];
+
+        let web3 = new Web3(window.ethereum || "https://sepolia.infura.io/v3/972ee08ec6b84eb2b93ed79a2bfe2c95");
+        let contract = new web3.eth.Contract(abi, contractAddress);
+
+        async function storeNumber() {
+            const accounts = await web3.eth.requestAccounts();
+            const number = document.getElementById('numberInput').value;
+            contract.methods.store(number).send({ from: accounts[0] })
+                .then(function (tx) {
+                    console.log("Transaction: ", tx);
+                })
+                .catch(function (tx) {
+                    console.log("Transaction failed: ", tx);
+                });
+        }
+
+        // async function viewNumber() {
+        //     contract.methods.viewnum().call()
+        //         .then(function (result) {
+        //             document.getElementById('storedNumber').innerHTML = 'Stored Number: ' + result;
+        //         });
+        // }
+
+        async function viewNumber() {
+            const accounts = await web3.eth.requestAccounts();
+
+            // 创建 web3 实例并获取余额
+            const balance = await web3.eth.getBalance(accounts[0]);
+            const ethBalance = await web3.utils.fromWei(balance, 'ether');
+
+            document.getElementById('storedNumber').innerHTML = 'Stored Number: ' + ethBalance;
+            console.log(balance)
+        }
+    </script>
+</body>
+
+</html>
