@@ -1,0 +1,23 @@
+body {
+    background-color: #141618;
+    /* text-align: center; */
+    font-family: "Roboto", sans-serif;
+}
+
+div {
+    color: white;
+}
+
+.sidenav {
+    height: 100%;
+    width: 15%;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #24272a;
+    overflow-x: hidden;
+    transition: 0.5s;
+    padding-top: 60px;
+    text-align: center;
+}
