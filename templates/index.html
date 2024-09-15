@@ -13,21 +13,18 @@
 <body>
     <div class="sidenav">
         <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
-        <h3 class="sidenavElement" id="FoxWallet"><b>🦊FOX WALLET</b></h3>
-        <div><a class="sidenavElement" href="#"> 📊Overview</a></div>
-        <div><a class="sidenavElement active" href="#">🔁Move Crypto</a></div>
-        <div><a class="sidenavElement" href="#">💸 Deposit & Withdraw</a></div>
-        <div><a class="sidenavElement" href="#">🪙Tokens</a></div>
-        <div><a class="sidenavElement" href="#">🖼️NFTs</a></div>
-        <div><a class="sidenavElement" href="#">🕹️Games</a></div>
+        <h3 class="sidenavElement" id="FoxWallet"><b>🦊 FOX WALLET</b></h3>
+        <div><a class="sidenavElement" href="#"> 📊 Overview</a></div>
+        <div><a class="sidenavElement" id="defaultTab" href="#" onclick="changeTab(event, 'moveCrypto')">🔁 Move Crypto</a></div>
+        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'depositNWithdraw')">💸 Deposit & Withdraw</a>
+        </div>
+        <div><a class="sidenavElement" href="#">🪙 Tokens</a></div>
+        <div><a class="sidenavElement" href="#">🖼️ NFTs</a></div>
+        <div><a class="sidenavElement" href="#">🕹️ Games</a></div>
     </div>
 
-    <div style="margin-left: 20%; margin-top: 3%;">
-        <h1>Transfer</h1>
-    </div>
 
-    <form id="inforform" onsubmit="return false;" style="margin-left: 20%; margin-right: 5%;">
-
+    <form id="moveCrypto" class="tabcontent" onsubmit="return false;">
         <p>
             <b>Send from</b>
             <select id="senders" name="senders" onchange="GetBalance()">
@@ -45,6 +42,12 @@
             <input type="text" id="amount" placeholder="amount" />
             <button onclick="TranferTo()">Tranfer</button>
         </div>
+    </form>
+
+    <form id="depositNWithdraw" class="tabcontent" onsubmit="return false;">
+        <p>
+            test
+        </p>
     </form>
 </body>
 
