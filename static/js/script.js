@@ -53,7 +53,7 @@ contract = new web3.eth.Contract(contractABI, contractAddress);
 
 GetSender()
 
-async function TranferTo() {
+async function TransferTo() {
     const recipient = document.getElementById('recipient').value;
     const amount = document.getElementById('amount').value;
 
@@ -61,6 +61,27 @@ async function TranferTo() {
     var selectedValue = select.options[select.selectedIndex].value;
 
     const amountInWei = web3.utils.toWei(amount, 'ether');
+
+    const logData = {
+        payer: selectedValue,
+        payee: recipient,
+        amount: amountInWei
+    };
+
+    $.ajax({
+        url: '/addlog',
+        type: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(logData),
+        success: function (response) {
+            alert(response.message);
+            $('#log-form')[0].reset(); // 重置表单
+            loadLogs(); // 重新加载日志
+        },
+        error: function (err) {
+            console.error('Failed to add log:', err);
+        }
+    });
 
     await web3.eth.sendTransaction({
         from: selectedValue,
@@ -157,6 +178,39 @@ function changeTab(evt, tabName) {
     document.getElementById(tabName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+function loadLogs() {
+    $.ajax({
+        url: '/logs',
+        type: 'GET',
+        success: function (logs) {
+            var logsTableBody = document.getElementById('logs-table').getElementsByTagName('tbody')[0];
+            logsTableBody.innerHTML = '';  // 清空现有的表格内容
+
+            logs.forEach(function (log) {
+                var row = document.createElement('tr');
+
+                var payerCell = document.createElement('td');
+                payerCell.textContent = log.payer;
+                row.appendChild(payerCell);
+
+                var payeeCell = document.createElement('td');
+                payeeCell.textContent = log.payee;
+                row.appendChild(payeeCell);
+
+                var amountCell = document.createElement('td');
+                amountCell.textContent = log.amount;
+                row.appendChild(amountCell);
+
+                logsTableBody.appendChild(row);  // 添加新行到表格
+            });
+        },
+        error: function (err) {
+            console.error('Failed to fetch logs:', err);
+        }
+    });
+}
+
 
 window.onload = function () {
     document.getElementById('defaultTab').click();

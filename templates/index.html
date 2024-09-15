@@ -7,6 +7,7 @@
     <title>FoxWallet</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdn.jsdelivr.net/npm/web3/dist/web3.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </head>
 
@@ -15,9 +16,10 @@
         <!-- <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a> -->
         <h3 class="sidenavElement" id="FoxWallet"><b>🦊 FOX WALLET</b></h3>
         <div><a class="sidenavElement" href="#"> 📊 Overview</a></div>
-        <div><a class="sidenavElement" id="defaultTab" href="#" onclick="changeTab(event, 'moveCrypto')">🔁 Move Crypto</a></div>
-        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'bank')">🏦 Bank</a>
-        </div>
+        <div><a class="sidenavElement" id="defaultTab" href="#" onclick="changeTab(event, 'moveCrypto')">🔁 Move
+                Crypto</a></div>
+        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'bank')">🏦 Bank</a></div>
+        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'logs');loadLogs()">🧾 Logs</a></div>
         <div><a class="sidenavElement" href="#">🪙 Tokens</a></div>
         <div><a class="sidenavElement" href="#">🖼️ NFTs</a></div>
         <div><a class="sidenavElement" href="#">🕹️ Games</a></div>
@@ -42,7 +44,7 @@
         <div>
             <input type="text" id="recipient" placeholder="recipient" />
             <input type="text" id="amount" placeholder="amount" />
-            <button onclick="TranferTo()">Tranfer</button>
+            <button onclick="TransferTo()">Transfer</button>
         </div>
     </form>
 
@@ -55,6 +57,20 @@
             <input type="text" id="withdrawAmount" placeholder="withdraw amount" />
             <button onclick="bankWithdraw()">Withdraw</button>
         </div>
+    </form>
+
+    <form id="logs" class="tabcontent" onsubmit="return false;">
+        <table id="logs-table">
+            <thead>
+                <tr>
+                    <th>Payer</th>
+                    <th>Payee</th>
+                    <th>Amount</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
     </form>
 </body>
 
