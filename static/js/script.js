@@ -1,4 +1,55 @@
 let web3 = new Web3(window.ethereum);
+const contractAddress = "0x8BFFC531D75FEE35ca27C1F2be4F8C7C9d362044";
+const contractABI =
+    [
+        {
+            "inputs": [],
+            "name": "checkBalance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "contractBalance",
+            "outputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "",
+                    "type": "uint256"
+                }
+            ],
+            "stateMutability": "view",
+            "type": "function"
+        },
+        {
+            "inputs": [],
+            "name": "deposit",
+            "outputs": [],
+            "stateMutability": "payable",
+            "type": "function"
+        },
+        {
+            "inputs": [
+                {
+                    "internalType": "uint256",
+                    "name": "amount",
+                    "type": "uint256"
+                }
+            ],
+            "name": "withdraw",
+            "outputs": [],
+            "stateMutability": "nonpayable",
+            "type": "function"
+        }
+    ];
+contract = new web3.eth.Contract(contractABI, contractAddress);
 
 GetSender()
 
@@ -43,6 +94,54 @@ async function GetSender() {
     }
     GetBalance()
 }
+
+async function bankDeposit() {
+    const depositAmount = document.getElementById('depositAmount').value;
+    var select = document.getElementById('senders');
+    if (contract && depositAmount) {
+        try {
+            await contract.methods.deposit().send({
+                from: select.options[select.selectedIndex].value,
+                value: web3.utils.toWei(depositAmount, 'ether')
+            });
+            alert('Deposit successful!');
+        } catch (error) {
+            console.error(error);
+            alert('Deposit failed');
+        }
+    }
+}
+async function bankWithdraw() {
+    const withdrawAmount = document.getElementById('withdrawAmount').value;
+    var select = document.getElementById('senders');
+    if (contract && withdrawAmount) {
+        try {
+            await contract.methods.withdraw(web3.utils.toWei(withdrawAmount, 'ether')).send({
+                from: select.options[select.selectedIndex].value
+            });
+            alert('Withdraw successful!');
+        } catch (error) {
+            console.error(error);
+            alert('Withdraw failed');
+        }
+    }
+}
+
+async function bankBalance() {
+    var select = document.getElementById('senders');
+    if (contract) {
+        try {
+            const balance = await contract.methods.checkBalance().call({
+                from: select.options[select.selectedIndex].value
+            });
+            document.getElementById('bankBalance').innerText = `${web3.utils.fromWei(balance, 'ether')} ETH available in Bank`;
+        } catch (error) {
+            console.error(error);
+            alert('Failed to retrieve balance');
+        }
+    }
+}
+
 
 function changeTab(evt, tabName) {
     console.log(tabName)

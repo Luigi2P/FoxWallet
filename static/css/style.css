@@ -47,10 +47,10 @@ form {
     background-color: #24272a;
     padding: 20px;
     border-radius: 8px;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 20%;
     margin-right: 5%;
-    display: none;
+    /* display: none; */
 }
 
 input[type="text"], select {

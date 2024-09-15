@@ -16,15 +16,14 @@
         <h3 class="sidenavElement" id="FoxWallet"><b>🦊 FOX WALLET</b></h3>
         <div><a class="sidenavElement" href="#"> 📊 Overview</a></div>
         <div><a class="sidenavElement" id="defaultTab" href="#" onclick="changeTab(event, 'moveCrypto')">🔁 Move Crypto</a></div>
-        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'depositNWithdraw')">💸 Deposit & Withdraw</a>
+        <div><a class="sidenavElement" href="#" onclick="changeTab(event, 'bank')">🏦 Bank</a>
         </div>
         <div><a class="sidenavElement" href="#">🪙 Tokens</a></div>
         <div><a class="sidenavElement" href="#">🖼️ NFTs</a></div>
         <div><a class="sidenavElement" href="#">🕹️ Games</a></div>
     </div>
 
-
-    <form id="moveCrypto" class="tabcontent" onsubmit="return false;">
+    <form id="Account" onsubmit="return false;">
         <p>
             <b>Send from</b>
             <select id="senders" name="senders" onchange="GetBalance()">
@@ -37,6 +36,9 @@
             <b id="Balance">? ETH available to swap</b>
             <button onclick="GetBalance()">Refresh Balance</button>
         </p>
+    </form>
+
+    <form id="moveCrypto" class="tabcontent" onsubmit="return false;">
         <div>
             <input type="text" id="recipient" placeholder="recipient" />
             <input type="text" id="amount" placeholder="amount" />
@@ -44,10 +46,15 @@
         </div>
     </form>
 
-    <form id="depositNWithdraw" class="tabcontent" onsubmit="return false;">
-        <p>
-            test
-        </p>
+    <form id="bank" class="tabcontent" onsubmit="return false;">
+        <div>
+            <b id="bankBalance">? ETH available in Bank</b>
+            <button onclick="bankBalance()">Refresh Bank Balance</button>
+            <input type="text" id="depositAmount" placeholder="deposit amount" />
+            <button onclick="bankDeposit()">Deposit</button>
+            <input type="text" id="withdrawAmount" placeholder="withdraw amount" />
+            <button onclick="bankWithdraw()">Withdraw</button>
+        </div>
     </form>
 </body>
 
